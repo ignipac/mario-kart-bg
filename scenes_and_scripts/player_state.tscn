@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://d0piv7uvskoyy"]
+
+[ext_resource type="Texture2D" uid="uid://t04yfpyj8awy" path="res://assets/cardBack_red1.png" id="1_fykrx"]
+[ext_resource type="Script" uid="uid://cls48ou2gseou" path="res://scenes_and_scripts/player_state.gd" id="1_k0oro"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_b2ile"]
+font_size = 32
+
+[node name="PlayerState" type="VBoxContainer" unique_id=1992114973]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_k0oro")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=464749483]
+layout_mode = 2
+text = "Player X"
+label_settings = SubResource("LabelSettings_4c57u")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1755730392]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=390885873]
+layout_mode = 2
+texture = ExtResource("1_fykrx")
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/TextureRect" unique_id=519674762]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 19.0
+offset_right = 99.0
+offset_bottom = 42.0
+text = "Banana"
+
+[node name="Description" type="RichTextLabel" parent="HBoxContainer/TextureRect" unique_id=686816693]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 54.0
+offset_right = 120.0
+offset_bottom = 166.0
+theme_override_font_sizes/normal_font_size = 14
+text = "Throw 3 spaces behind or infront, moves player back 3 spaces"
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer" unique_id=1630862413]
+layout_mode = 2
+texture = ExtResource("1_fykrx")
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/TextureRect3" unique_id=431003510]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Description" type="Label" parent="HBoxContainer/TextureRect3" unique_id=1339534298]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Label" type="Label" parent="." unique_id=1119286754]
+layout_mode = 2
+offset_transform_enabled = true
+text = "Coins: 0
+Lap: 0/3"
+label_settings = SubResource("LabelSettings_b2ile")
+horizontal_alignment = 1

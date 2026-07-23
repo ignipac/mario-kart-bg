@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://cfdk82axrt4n1"]
+
+[ext_resource type="Script" uid="uid://cki6jfnski6v2" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dqucihli8qqf5" path="res://assets/track.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dg8juaiji5ec8" path="res://assets/car/car_black.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://c1kwevgsj85i5" path="res://assets/car/car_blue.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dh4vd6kjk0gsa" path="res://assets/car/car_purple.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://v0bw7voah10h" path="res://assets/car/car_green.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://bgfbfi0qurau7" path="res://assets/dice/dieRed1.png" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://t04yfpyj8awy" path="res://assets/cardBack_red1.png" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dlml3iyyh6i5i" path="res://scenes_and_scripts/coin.tscn" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://bw2lcpfibugw4" path="res://assets/random.png" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bd1wbbsonsb2i" path="res://scenes_and_scripts/item.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://d0piv7uvskoyy" path="res://scenes_and_scripts/player_state.tscn" id="12_dg77c"]
+[ext_resource type="Texture2D" uid="uid://c4wpswhyr3yba" path="res://assets/chipWhite_border.png" id="13_ycdy4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpk54"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=2022499794]
+script = ExtResource("1_0xm2m")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=732579684]
+position = Vector2(990, -540)
+
+[node name="Track" type="Node" parent="." unique_id=855155784]
+
+[node name="Track2" type="Sprite2D" parent="." unique_id=1721521041]
+position = Vector2(1085, -547)
+texture = ExtResource("1_ig7tw")
+
+[node name="CarBlack" type="Sprite2D" parent="." unique_id=1424634006]
+position = Vector2(805, -870)
+texture = ExtResource("3_h2yge")
+
+[node name="CarBlue" type="Sprite2D" parent="." unique_id=1934635677]
+position = Vector2(844, -825)
+texture = ExtResource("4_1bvp3")
+
+[node name="CarPurple" type="Sprite2D" parent="." unique_id=1993955730]
+position = Vector2(848, -904)
+texture = ExtResource("5_7mycd")
+
+[node name="CarGreen" type="Sprite2D" parent="." unique_id=1866152606]
+position = Vector2(890, -852)
+texture = ExtResource("6_272bh")
+
+[node name="DiceSprite" type="Sprite2D" parent="." unique_id=1391465444]
+position = Vector2(1458, -218)
+texture = ExtResource("7_272bh")
+
+[node name="RollButton" type="Button" parent="." unique_id=1790391547]
+offset_left = 1391.0
+offset_top = -143.0
+offset_right = 1515.0
+offset_bottom = -47.0
+theme_override_font_sizes/font_size = 64
+text = "Roll"
+metadata/_edit_use_anchors_ = true
+
+[node name="DrawCardButton" type="Button" parent="." unique_id=1915730547]
+offset_left = 1553.0
+offset_top = -143.0
+offset_right = 1887.0
+offset_bottom = -47.0
+theme_override_font_sizes/font_size = 64
+text = "Draw Card
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="CardBackRed1" type="Sprite2D" parent="." unique_id=1935018276]
+position = Vector2(1716, -300)
+texture = ExtResource("8_5vw27")
+
+[node name="Random" type="Sprite2D" parent="CardBackRed1" unique_id=902957986]
+position = Vector2(0, 5)
+texture = ExtResource("10_4c57u")
+
+[node name="Coin" parent="." unique_id=138404386 instance=ExtResource("9_kek77")]
+visible = false
+position = Vector2(692, -579)
+
+[node name="Item" parent="." unique_id=1895599533 instance=ExtResource("11_efxa6")]
+offset_left = 711.0
+offset_top = -424.0
+offset_right = 770.0
+offset_bottom = -375.0
+metadata/_edit_use_anchors_ = true
+
+[node name="MainTrackPoints" type="Node" parent="." unique_id=648579620]
+
+[node name="Marker2D" type="Marker2D" parent="MainTrackPoints" unique_id=1786275801]
+position = Vector2(739, -733)
+
+[node name="Marker2D2" type="Marker2D" parent="MainTrackPoints" unique_id=48154272]
+position = Vector2(752, -574)
+
+[node name="Marker2D3" type="Marker2D" parent="MainTrackPoints" unique_id=308811607]
+position = Vector2(778, -422)
+
+[node name="Marker2D4" type="Marker2D" parent="MainTrackPoints" unique_id=428399696]
+position = Vector2(887, -353)
+
+[node name="Marker2D5" type="Marker2D" parent="MainTrackPoints" unique_id=1682361027]
+position = Vector2(819, -269)
+
+[node name="Marker2D6" type="Marker2D" parent="MainTrackPoints" unique_id=454701285]
+position = Vector2(926, -185)
+
+[node name="Marker2D7" type="Marker2D" parent="MainTrackPoints" unique_id=1660217161]
+position = Vector2(1075, -149)
+
+[node name="Marker2D8" type="Marker2D" parent="MainTrackPoints" unique_id=1184856304]
+position = Vector2(1209, -224)
+
+[node name="Marker2D9" type="Marker2D" parent="MainTrackPoints" unique_id=684535739]
+position = Vector2(1341, -346)
+
+[node name="Marker2D10" type="Marker2D" parent="MainTrackPoints" unique_id=1208060027]
+position = Vector2(1448, -466)
+
+[node name="Marker2D11" type="Marker2D" parent="MainTrackPoints" unique_id=1123007154]
+position = Vector2(1403, -615)
+
+[node name="Marker2D12" type="Marker2D" parent="MainTrackPoints" unique_id=1601885267]
+position = Vector2(1256, -638)
+
+[node name="Marker2D13" type="Marker2D" parent="MainTrackPoints" unique_id=613010442]
+position = Vector2(1184, -779)
+
+[node name="Marker2D14" type="Marker2D" parent="MainTrackPoints" unique_id=763118342]
+position = Vector2(1116, -901)
+
+[node name="Marker2D15" type="Marker2D" parent="MainTrackPoints" unique_id=1584186322]
+position = Vector2(959, -945)
+
+[node name="Marker2D16" type="Marker2D" parent="MainTrackPoints" unique_id=989123568]
+position = Vector2(842, -852)
+
+[node name="MajorShortCut" type="Node" parent="." unique_id=845738977]
+
+[node name="Marker2D" type="Marker2D" parent="MajorShortCut" unique_id=171529086]
+position = Vector2(896, -517)
+
+[node name="Marker2D2" type="Marker2D" parent="MajorShortCut" unique_id=1107630256]
+position = Vector2(1030, -446)
+
+[node name="Marker2D3" type="Marker2D" parent="MajorShortCut" unique_id=35314685]
+position = Vector2(1086, -303)
+
+[node name="MinorShortCut" type="Node" parent="." unique_id=1646582024]
+
+[node name="Marker2D" type="Marker2D" parent="MinorShortCut" unique_id=1215706923]
+position = Vector2(1294, -504)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1998127568]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1203370722]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5686275, 0.32941177, 0.2627451, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=5806028]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer2" unique_id=903499102]
+offset_left = 27.0
+offset_top = 26.0
+offset_right = 599.0
+offset_bottom = 702.0
+columns = 2
+
+[node name="BlackPlayerState" parent="CanvasLayer2/GridContainer" unique_id=1628398667 instance=ExtResource("12_dg77c")]
+layout_mode = 2
+title = "Black Car"
+metadata/_edit_use_anchors_ = true
+
+[node name="BluePlayerState" parent="CanvasLayer2/GridContainer" unique_id=1992114973 instance=ExtResource("12_dg77c")]
+layout_mode = 2
+title = "Blue Car"
+metadata/_edit_use_anchors_ = true
+
+[node name="PurplePlayerState" parent="CanvasLayer2/GridContainer" unique_id=1573156507 instance=ExtResource("12_dg77c")]
+layout_mode = 2
+title = "Purple Car"
+metadata/_edit_use_anchors_ = true
+
+[node name="GreenPlayerState" parent="CanvasLayer2/GridContainer" unique_id=885918726 instance=ExtResource("12_dg77c")]
+layout_mode = 2
+title = "Green Car"
+metadata/_edit_use_anchors_ = true
+
+[node name="Node" type="Node" parent="." unique_id=645696521]
+
+[node name="FlipCoin" type="Sprite2D" parent="Node" unique_id=1113880343]
+position = Vector2(1703, -929)
+scale = Vector2(2.1029413, 2.1029413)
+texture = ExtResource("13_ycdy4")
+
+[node name="FlipButton" type="Button" parent="Node" unique_id=1850287833]
+offset_left = 1642.0
+offset_top = -822.0
+offset_right = 1773.0
+offset_bottom = -747.0
+theme_override_font_sizes/font_size = 48
+text = "Flip"
+metadata/_edit_use_anchors_ = true
+
+[node name="CoinOutcome" type="Label" parent="Node" unique_id=394490135]
+offset_left = 1669.0
+offset_top = -945.0
+offset_right = 1741.0
+offset_bottom = -911.0
+text = "Heads"
+label_settings = SubResource("LabelSettings_kpk54")
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=918223906]
+visible = false
+
+[node name="Panel" type="Panel" parent="CanvasLayer3" unique_id=648273696]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -371.0
+offset_top = -245.0
+offset_right = 371.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer3/Panel" unique_id=467824350]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "... Wins!"
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="DrawCardButton" to="." method="_on_draw_card_button_pressed"]
+[connection signal="pressed" from="Node/FlipButton" to="." method="_on_flip_button_pressed"]

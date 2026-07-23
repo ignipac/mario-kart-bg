@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bd1wbbsonsb2i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpk54"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Item" type="Label" unique_id=1895599533]
+offset_left = 686.0
+offset_top = -440.0
+offset_right = 745.0
+offset_bottom = -391.0
+text = "Banana
+"
+label_settings = SubResource("LabelSettings_kpk54")
