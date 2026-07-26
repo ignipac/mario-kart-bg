@@ -18,25 +18,26 @@ var player_state = {
 		"cards": [],
 		"lap": 0,
 	},
-		Car.BLUE: {
+	Car.BLUE: {
 		"pos": 0,
 		"coins": 0,
 		"cards": [],
 		"lap": 0,
 	},
-		Car.PURPLE: {
+	Car.PURPLE: {
 		"pos": 0,
 		"coins": 0,
 		"cards": [],
 		"lap": 0,
 	},
-		Car.GREEN: {
+	Car.GREEN: {
 		"pos": 0,
 		"coins": 0,
 		"cards": [],
 		"lap": 0,
 	},
 }
+var car_textures = []
 @onready var car_black: Sprite2D = $CarBlack
 @onready var car_blue: Sprite2D = $CarBlue
 @onready var car_purple: Sprite2D = $CarPurple
@@ -48,6 +49,7 @@ var player_state = {
 @onready var green_player_state: VBoxContainer = $CanvasLayer2/GridContainer/GreenPlayerState
 
 @onready var main_track_markers: Node = $MainTrackPoints
+@onready var turn_texture: TextureRect = $TurnTrackerUI/TextureRect
 
 var tiles: Array[Marker2D] = []
 
@@ -76,18 +78,26 @@ var roll: int
 func _ready() -> void:
 	for child in main_track_markers.get_children():
 		tiles.append(child)
-		
+	
+	car_textures.append_array([car_black.texture, car_blue.texture, car_purple.texture, car_green.texture])
+	
 	lap_completed.connect(func():
 		match current_player_turn:
 			Car.BLACK:
-				black_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
+				black_player_state.change_label(player_state[current_player_turn]["coins"], 
+				player_state[current_player_turn]["lap"])
 			Car.BLUE:
-				blue_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
+				blue_player_state.change_label(player_state[current_player_turn]["coins"], 
+				player_state[current_player_turn]["lap"])
 			Car.PURPLE:
-				purple_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
+				purple_player_state.change_label(player_state[current_player_turn]["coins"], 
+				player_state[current_player_turn]["lap"])
 			Car.GREEN:
-				green_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
+				green_player_state.change_label(player_state[current_player_turn]["coins"], 
+				player_state[current_player_turn]["lap"])
 	)
+	
+	load_coins_to_every_other_tile()
 	
 	
 
@@ -110,8 +120,6 @@ func _on_roll_button_pressed() -> void:
 		player_state[current_player_turn]["pos"] += roll
 	else:
 		player_state[current_player_turn]["pos"] = pos + roll + 1
-	
-	print(player_state[current_player_turn]["pos"])
 
 	var has_passed_start = player_state[current_player_turn]["pos"] > tiles.size() - 2
 	if has_passed_start:
@@ -121,29 +129,42 @@ func _on_roll_button_pressed() -> void:
 		player_state[current_player_turn]["lap"] += 1
 		lap_completed.emit()
 	
+	# shows the visual change in position 
 	var tween = create_tween()
 	match current_player_turn:
 		Car.BLACK:
 			tween.tween_property(car_black, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
-			black_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
 		Car.BLUE:
 			tween.tween_property(car_blue, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
-			blue_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
 		Car.PURPLE:
 			tween.tween_property(car_purple, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
-			purple_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
 		Car.GREEN:
 			tween.tween_property(car_green, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
-			green_player_state.change_lable(player_state[current_player_turn]["coins"], player_state[current_player_turn]["lap"])
 	
 	next_turn()
 	
 func next_turn():
 	var turn_order = current_player_turn + 1
+	
 	if turn_order > Car.size() - 1:
-		current_player_turn = 0
+		current_player_turn = 0 as Car
+		turn_texture.texture = car_textures[0]
 		return
 	
-	current_player_turn += 1
+	current_player_turn = turn_order as Car
+	turn_texture.texture = car_textures[turn_order]
+	
+func load_coins_to_every_other_tile() -> void:
+	var count = 0
+	for tile in tiles:
+		if count % 2 == 0:
+			var shortcut_coin = load("res://scenes_and_scripts/coin.tscn") as PackedScene
+			var coin_instance = shortcut_coin.instantiate()
+			get_node("ShorcutCoins").add_child(coin_instance)
+			coin_instance.global_position = tile.global_position
+		count += 1
+	
+	
+	
 	
 	

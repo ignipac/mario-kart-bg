@@ -5,6 +5,7 @@
 
 [node name="ChipWhiteBorder" type="Sprite2D" unique_id=138404386]
 self_modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_pfl2a")
 script = ExtResource("2_pedoi")
 

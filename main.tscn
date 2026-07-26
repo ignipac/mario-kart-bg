@@ -14,9 +14,18 @@
 [ext_resource type="PackedScene" uid="uid://d0piv7uvskoyy" path="res://scenes_and_scripts/player_state.tscn" id="12_dg77c"]
 [ext_resource type="Texture2D" uid="uid://c4wpswhyr3yba" path="res://assets/chipWhite_border.png" id="13_ycdy4"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_kpk54"]
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_ycdy4"]
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpk54"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2ile"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b2ile"]
+font_size = 32
 
 [node name="Main" type="Node2D" unique_id=2022499794]
 script = ExtResource("1_0xm2m")
@@ -79,63 +88,184 @@ texture = ExtResource("10_4c57u")
 
 [node name="Coin" parent="." unique_id=138404386 instance=ExtResource("9_kek77")]
 visible = false
-position = Vector2(692, -579)
+position = Vector2(892, -681)
 
 [node name="Item" parent="." unique_id=1895599533 instance=ExtResource("11_efxa6")]
-offset_left = 711.0
-offset_top = -424.0
-offset_right = 770.0
-offset_bottom = -375.0
+visible = false
+offset_left = 764.0
+offset_top = -413.0
+offset_right = 823.0
+offset_bottom = -364.0
 metadata/_edit_use_anchors_ = true
 
 [node name="MainTrackPoints" type="Node" parent="." unique_id=648579620]
 
-[node name="Marker2D" type="Marker2D" parent="MainTrackPoints" unique_id=1786275801]
+[node name="Tile_1" type="Marker2D" parent="MainTrackPoints" unique_id=1786275801]
 position = Vector2(739, -733)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Tile_1" unique_id=970607789]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "1"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D2" type="Marker2D" parent="MainTrackPoints" unique_id=48154272]
 position = Vector2(752, -574)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D2" unique_id=1683044143]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "2"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D3" type="Marker2D" parent="MainTrackPoints" unique_id=308811607]
 position = Vector2(778, -422)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D3" unique_id=189282877]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "3"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D4" type="Marker2D" parent="MainTrackPoints" unique_id=428399696]
 position = Vector2(887, -353)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D4" unique_id=415557533]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "4"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D5" type="Marker2D" parent="MainTrackPoints" unique_id=1682361027]
 position = Vector2(819, -269)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D5" unique_id=1161581319]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "5"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D6" type="Marker2D" parent="MainTrackPoints" unique_id=454701285]
 position = Vector2(926, -185)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D6" unique_id=609430148]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "6"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D7" type="Marker2D" parent="MainTrackPoints" unique_id=1660217161]
 position = Vector2(1075, -149)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D7" unique_id=436988012]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "7"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D8" type="Marker2D" parent="MainTrackPoints" unique_id=1184856304]
 position = Vector2(1209, -224)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D8" unique_id=549489619]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "8"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D9" type="Marker2D" parent="MainTrackPoints" unique_id=684535739]
 position = Vector2(1341, -346)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D9" unique_id=730170788]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "9"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D10" type="Marker2D" parent="MainTrackPoints" unique_id=1208060027]
 position = Vector2(1448, -466)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D10" unique_id=820413565]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "10"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D11" type="Marker2D" parent="MainTrackPoints" unique_id=1123007154]
 position = Vector2(1403, -615)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D11" unique_id=651858554]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "11"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D12" type="Marker2D" parent="MainTrackPoints" unique_id=1601885267]
 position = Vector2(1256, -638)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D12" unique_id=1051785812]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "12"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D13" type="Marker2D" parent="MainTrackPoints" unique_id=613010442]
 position = Vector2(1184, -779)
+
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D13" unique_id=42366914]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "13"
+label_settings = SubResource("LabelSettings_ycdy4")
 
 [node name="Marker2D14" type="Marker2D" parent="MainTrackPoints" unique_id=763118342]
 position = Vector2(1116, -901)
 
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D14" unique_id=205278988]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "14"
+label_settings = SubResource("LabelSettings_ycdy4")
+
 [node name="Marker2D15" type="Marker2D" parent="MainTrackPoints" unique_id=1584186322]
 position = Vector2(959, -945)
 
-[node name="Marker2D16" type="Marker2D" parent="MainTrackPoints" unique_id=989123568]
+[node name="Label" type="Label" parent="MainTrackPoints/Marker2D15" unique_id=558991905]
+offset_left = -5.0
+offset_top = -11.0
+offset_right = 35.0
+offset_bottom = 12.0
+text = "15"
+label_settings = SubResource("LabelSettings_ycdy4")
+
+[node name="Start" type="Marker2D" parent="MainTrackPoints" unique_id=989123568]
 position = Vector2(842, -852)
 
 [node name="MajorShortCut" type="Node" parent="." unique_id=845738977]
@@ -195,30 +325,33 @@ layout_mode = 2
 title = "Green Car"
 metadata/_edit_use_anchors_ = true
 
-[node name="Node" type="Node" parent="." unique_id=645696521]
+[node name="HitMissCoinUI" type="VBoxContainer" parent="." unique_id=1890244654]
+offset_left = 1665.0
+offset_top = -736.0
+offset_right = 1872.0
+offset_bottom = -475.0
+theme_override_constants/separation = 45
 
-[node name="FlipCoin" type="Sprite2D" parent="Node" unique_id=1113880343]
-position = Vector2(1703, -929)
-scale = Vector2(2.1029413, 2.1029413)
+[node name="CoinOutcome" type="Label" parent="HitMissCoinUI" unique_id=394490135]
+z_index = 1
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.86, 3.33)
+offset_transform_scale = Vector2(2, 2)
+text = "Hit"
+label_settings = SubResource("LabelSettings_kpk54")
+
+[node name="FlipCoin" type="TextureRect" parent="HitMissCoinUI" unique_id=1248541168]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(2, 2)
 texture = ExtResource("13_ycdy4")
+stretch_mode = 3
 
-[node name="FlipButton" type="Button" parent="Node" unique_id=1850287833]
-offset_left = 1642.0
-offset_top = -822.0
-offset_right = 1773.0
-offset_bottom = -747.0
+[node name="FlipButton" type="Button" parent="HitMissCoinUI" unique_id=1850287833]
+layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Flip"
-metadata/_edit_use_anchors_ = true
-
-[node name="CoinOutcome" type="Label" parent="Node" unique_id=394490135]
-offset_left = 1669.0
-offset_top = -945.0
-offset_right = 1741.0
-offset_bottom = -911.0
-text = "Heads"
-label_settings = SubResource("LabelSettings_kpk54")
-metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=918223906]
 visible = false
@@ -242,6 +375,59 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "... Wins!"
 
+[node name="Shortcuts" type="Node" parent="." unique_id=537650210]
+
+[node name="MajorShorcut" type="Panel" parent="Shortcuts" unique_id=1205275754]
+offset_left = 834.7021
+offset_top = -585.4335
+offset_right = 854.7021
+offset_bottom = -502.0846
+rotation = 0.37841693
+theme_override_styles/panel = SubResource("StyleBoxFlat_b2ile")
+
+[node name="MinorShorcut" type="Panel" parent="Shortcuts" unique_id=2125124283]
+offset_left = 1348.0
+offset_top = -459.0
+offset_right = 1368.0
+offset_bottom = -375.65112
+rotation = 1.2999251
+theme_override_styles/panel = SubResource("StyleBoxFlat_b2ile")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shortcuts" unique_id=1556278451]
+offset_left = 50.0
+offset_top = -165.0
+offset_right = 526.0
+offset_bottom = -49.0
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="Shortcuts/VBoxContainer" unique_id=503591782]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pay 3 coins to use shorcut at 2"
+
+[node name="Button2" type="Button" parent="Shortcuts/VBoxContainer" unique_id=1448116583]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pay 2 coins to use shorcut at 9"
+
+[node name="TurnTrackerUI" type="VBoxContainer" parent="." unique_id=575611265]
+offset_left = 1692.0
+offset_top = -1039.0
+offset_right = 1765.0
+offset_bottom = -926.0
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="TurnTrackerUI" unique_id=1796007518]
+layout_mode = 2
+text = "Turn"
+label_settings = SubResource("LabelSettings_b2ile")
+
+[node name="TextureRect" type="TextureRect" parent="TurnTrackerUI" unique_id=1130345153]
+layout_mode = 2
+texture = ExtResource("3_h2yge")
+
+[node name="ShorcutCoins" type="Node" parent="." unique_id=988531441]
+
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="DrawCardButton" to="." method="_on_draw_card_button_pressed"]
-[connection signal="pressed" from="Node/FlipButton" to="." method="_on_flip_button_pressed"]
+[connection signal="pressed" from="HitMissCoinUI/FlipButton" to="." method="_on_flip_button_pressed"]

@@ -6,16 +6,13 @@ extends VBoxContainer
 @onready var label: Label = $Label
 
 func _ready() -> void:
-	change_title(title)
-
-func change_title(title: String):
 	title_label.text = title
 
-func change_lable(coins: int, lap: int):
+func change_label(coins: int, lap: int):
 	label.text = "Coins: " + str(coins) + "\n" + "Lap: " + str(lap) + "/3"
 	animate_label()
 	
 func animate_label():
 	var tween = create_tween()
-	tween.tween_property(label, "offset_transform_scale", 1.1, 0.2)
-	tween.tween_property(label, "offset_transform_scale", 1.0, 0.2)
+	tween.tween_property(label, "offset_transform_scale", Vector2(1.1, 1.1), 0.2)
+	tween.tween_property(label, "offset_transform_scale", Vector2.ONE, 0.2)
