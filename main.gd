@@ -1,6 +1,7 @@
 extends Node2D
 
 signal lap_completed
+signal player_won(winner: Car)
 
 enum Car {
 	BLACK,
@@ -9,8 +10,10 @@ enum Car {
 	GREEN
 }
 
-var current_player_turn = Car.BLACK
+const LAST_LAP = 3
 
+var current_player_turn = Car.BLACK
+var piece_count = 0 # temp soultion to track when all pieces finish a lap
 var player_state = {
 	Car.BLACK: {
 		"pos": 0,
@@ -38,6 +41,7 @@ var player_state = {
 	},
 }
 var car_textures = []
+var car_areas = []
 @onready var car_black: Sprite2D = $CarBlack
 @onready var car_blue: Sprite2D = $CarBlue
 @onready var car_purple: Sprite2D = $CarPurple
@@ -80,27 +84,59 @@ func _ready() -> void:
 		tiles.append(child)
 	
 	car_textures.append_array([car_black.texture, car_blue.texture, car_purple.texture, car_green.texture])
-	
-	lap_completed.connect(func():
-		match current_player_turn:
-			Car.BLACK:
-				black_player_state.change_label(player_state[current_player_turn]["coins"], 
-				player_state[current_player_turn]["lap"])
-			Car.BLUE:
-				blue_player_state.change_label(player_state[current_player_turn]["coins"], 
-				player_state[current_player_turn]["lap"])
-			Car.PURPLE:
-				purple_player_state.change_label(player_state[current_player_turn]["coins"], 
-				player_state[current_player_turn]["lap"])
-			Car.GREEN:
-				green_player_state.change_label(player_state[current_player_turn]["coins"], 
-				player_state[current_player_turn]["lap"])
-	)
-	
-	load_coins_to_every_other_tile()
-	
+	car_areas.append_array([$CarBlack/CBlackArea2D, $CarBlue/CBlueArea2D, $CarPurple/CPurpleArea2D, $CarGreen/CGreenArea2D])
 	
 
+	lap_completed.connect(func():
+		update_player_states()
+		piece_count += 1
+		print(piece_count)
+		if piece_count == 4:
+			add_coins_to_every_other_tile()
+			piece_count = 0
+		# does not work as intended as it's not unique to each piece
+	)
+	
+	player_won.connect(func(winner):
+		print("player won", Car.find_key(winner))
+		get_node($WinnerUI.get_path()).show()
+		$WinnerUI/WinnerPanel/Label.text = (Car.find_key(winner) as String).to_lower().capitalize() + " Wins!"
+	)
+	
+	
+	add_coins_to_every_other_tile()
+	
+	for c_area in car_areas:
+		c_area.area_entered.connect(func(area: Area2D):
+			var the_coin_picked_up = area.get_parent()
+			if not the_coin_picked_up.has_method("fade_out"):
+				return
+			player_state[current_player_turn]["coins"] += 1
+			the_coin_picked_up.fade_out()
+			update_player_states()
+			$CarBlack/CBlackArea2D/CollisionShape2D.call_deferred("set_disabled", true)
+			$CarBlue/CBlueArea2D/CollisionShape2D.call_deferred("set_disabled", true)
+			$CarPurple/CPurpleArea2D/CollisionShape2D.call_deferred("set_disabled", true)
+			$CarGreen/CGreenArea2D/CollisionShape2D.call_deferred("set_disabled", true)
+		)
+	
+	
+func update_player_states():
+	match current_player_turn:
+		Car.BLACK:
+			black_player_state.change_label(player_state[current_player_turn]["coins"], 
+			player_state[current_player_turn]["lap"])
+		Car.BLUE:
+			blue_player_state.change_label(player_state[current_player_turn]["coins"], 
+			player_state[current_player_turn]["lap"])
+		Car.PURPLE:
+			purple_player_state.change_label(player_state[current_player_turn]["coins"], 
+			player_state[current_player_turn]["lap"])
+		Car.GREEN:
+			green_player_state.change_label(player_state[current_player_turn]["coins"], 
+			player_state[current_player_turn]["lap"])
+	
+	
 func _on_flip_button_pressed() -> void:
 	pass # Replace with function body.
 
@@ -127,6 +163,8 @@ func _on_roll_button_pressed() -> void:
 		var tiles_past_start = roll - tiles_left
 		player_state[current_player_turn]["pos"] = tiles_past_start
 		player_state[current_player_turn]["lap"] += 1
+		if player_state[current_player_turn]["lap"] > LAST_LAP:
+			player_won.emit(current_player_turn)
 		lap_completed.emit()
 	
 	# shows the visual change in position 
@@ -134,12 +172,16 @@ func _on_roll_button_pressed() -> void:
 	match current_player_turn:
 		Car.BLACK:
 			tween.tween_property(car_black, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
+			tween.finished.connect(func():$CarBlack/CBlackArea2D/CollisionShape2D.disabled = false)
 		Car.BLUE:
 			tween.tween_property(car_blue, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
+			tween.finished.connect(func():$CarBlue/CBlueArea2D/CollisionShape2D.disabled = false)
 		Car.PURPLE:
 			tween.tween_property(car_purple, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
+			tween.finished.connect(func():$CarPurple/CPurpleArea2D/CollisionShape2D.disabled = false)
 		Car.GREEN:
 			tween.tween_property(car_green, "global_position", tiles[player_state[current_player_turn]["pos"]].global_position, 0.4)
+			tween.finished.connect(func():$CarGreen/CGreenArea2D/CollisionShape2D.disabled = false)
 	
 	next_turn()
 	
@@ -153,18 +195,33 @@ func next_turn():
 	
 	current_player_turn = turn_order as Car
 	turn_texture.texture = car_textures[turn_order]
-	
-func load_coins_to_every_other_tile() -> void:
-	var count = 0
-	for tile in tiles:
-		if count % 2 == 0:
-			var shortcut_coin = load("res://scenes_and_scripts/coin.tscn") as PackedScene
+
+# could refill the tiles with coins, rather reset the ones picked up
+func add_coins_to_every_other_tile() -> void:
+	for idx in range(tiles.size() - 1):
+		if idx % 2 == 0:
+			if tiles[idx].get_child_count() > 1: # prevent doubling coins
+				continue
+			var shortcut_coin = load("res://scenes_and_scripts/shortcut_coin.tscn") as PackedScene
 			var coin_instance = shortcut_coin.instantiate()
-			get_node("ShorcutCoins").add_child(coin_instance)
-			coin_instance.global_position = tile.global_position
-		count += 1
+			tiles[idx].add_child(coin_instance)
+			#coin_instance.global_position = tile.global_position
+
+func use_major_shortcut():
+	pass
+	# TODO
+
+func use_minor_shortcut():
+	pass
+	# TODO
+
+func do_a_coin_flip():
+	pass
+	# TODO
 	
-	
+func draw_a_card():
+	pass
+	# TODO
 	
 	
 	

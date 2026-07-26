@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dlml3iyyh6i5i"]
+
+[ext_resource type="Texture2D" uid="uid://c4wpswhyr3yba" path="res://assets/chipWhite_border.png" id="1_pfl2a"]
+[ext_resource type="Script" uid="uid://w61lk5n4hdik" path="res://scenes_and_scripts/shortcut_coin.gd" id="2_pedoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2ile"]
+radius = 15.811386
+
+[node name="ShortcutCoin" type="Sprite2D" unique_id=138404386]
+self_modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_pfl2a")
+script = ExtResource("2_pedoi")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1514154309]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2020981515]
+shape = SubResource("CircleShape2D_b2ile")

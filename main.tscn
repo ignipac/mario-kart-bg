@@ -8,11 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://v0bw7voah10h" path="res://assets/car/car_green.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://bgfbfi0qurau7" path="res://assets/dice/dieRed1.png" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://t04yfpyj8awy" path="res://assets/cardBack_red1.png" id="8_5vw27"]
-[ext_resource type="PackedScene" uid="uid://dlml3iyyh6i5i" path="res://scenes_and_scripts/coin.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://dlml3iyyh6i5i" path="res://scenes_and_scripts/shortcut_coin.tscn" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://bw2lcpfibugw4" path="res://assets/random.png" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bd1wbbsonsb2i" path="res://scenes_and_scripts/item.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://d0piv7uvskoyy" path="res://scenes_and_scripts/player_state.tscn" id="12_dg77c"]
 [ext_resource type="Texture2D" uid="uid://c4wpswhyr3yba" path="res://assets/chipWhite_border.png" id="13_ycdy4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2ile"]
+radius = 11.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ycdy4"]
 font_color = Color(0, 0, 0, 1)
@@ -40,20 +43,52 @@ position = Vector2(1085, -547)
 texture = ExtResource("1_ig7tw")
 
 [node name="CarBlack" type="Sprite2D" parent="." unique_id=1424634006]
+z_index = 1
 position = Vector2(805, -870)
 texture = ExtResource("3_h2yge")
 
+[node name="CBlackArea2D" type="Area2D" parent="CarBlack" unique_id=788930435]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarBlack/CBlackArea2D" unique_id=591083870]
+shape = SubResource("CircleShape2D_b2ile")
+disabled = true
+debug_color = Color(0.9529412, 0, 0.050980393, 0.41960785)
+
 [node name="CarBlue" type="Sprite2D" parent="." unique_id=1934635677]
+z_index = 1
 position = Vector2(844, -825)
 texture = ExtResource("4_1bvp3")
 
+[node name="CBlueArea2D" type="Area2D" parent="CarBlue" unique_id=572234658]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarBlue/CBlueArea2D" unique_id=405712075]
+shape = SubResource("CircleShape2D_b2ile")
+disabled = true
+debug_color = Color(0.9529412, 0, 0.050980393, 0.41960785)
+
 [node name="CarPurple" type="Sprite2D" parent="." unique_id=1993955730]
+z_index = 1
 position = Vector2(848, -904)
 texture = ExtResource("5_7mycd")
 
+[node name="CPurpleArea2D" type="Area2D" parent="CarPurple" unique_id=623956315]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarPurple/CPurpleArea2D" unique_id=2068788843]
+shape = SubResource("CircleShape2D_b2ile")
+disabled = true
+debug_color = Color(0.9529412, 0, 0.050980393, 0.41960785)
+
 [node name="CarGreen" type="Sprite2D" parent="." unique_id=1866152606]
+z_index = 1
 position = Vector2(890, -852)
 texture = ExtResource("6_272bh")
+
+[node name="CGreenArea2D" type="Area2D" parent="CarGreen" unique_id=1526959159]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarGreen/CGreenArea2D" unique_id=1433231389]
+shape = SubResource("CircleShape2D_b2ile")
+disabled = true
+debug_color = Color(0.9529412, 0, 0.050980393, 0.41960785)
 
 [node name="DiceSprite" type="Sprite2D" parent="." unique_id=1391465444]
 position = Vector2(1458, -218)
@@ -353,10 +388,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Flip"
 
-[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=918223906]
+[node name="WinnerUI" type="CanvasLayer" parent="." unique_id=918223906]
 visible = false
 
-[node name="Panel" type="Panel" parent="CanvasLayer3" unique_id=648273696]
+[node name="WinnerPanel" type="Panel" parent="WinnerUI" unique_id=648273696]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -369,11 +404,15 @@ offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer3/Panel" unique_id=467824350]
+[node name="Label" type="Label" parent="WinnerUI/WinnerPanel" unique_id=467824350]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 108.0
+offset_top = 213.0
+offset_right = 345.0
+offset_bottom = 301.0
+theme_override_font_sizes/font_size = 64
 text = "... Wins!"
+horizontal_alignment = 1
 
 [node name="Shortcuts" type="Node" parent="." unique_id=537650210]
 
@@ -425,8 +464,6 @@ label_settings = SubResource("LabelSettings_b2ile")
 [node name="TextureRect" type="TextureRect" parent="TurnTrackerUI" unique_id=1130345153]
 layout_mode = 2
 texture = ExtResource("3_h2yge")
-
-[node name="ShorcutCoins" type="Node" parent="." unique_id=988531441]
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="DrawCardButton" to="." method="_on_draw_card_button_pressed"]
